@@ -1,0 +1,105 @@
+\documentclass{report}
+\usepackage{algorithmicx, circuitikz, mathtools, float, empheq, xstring, pgfplots, cmupint, enumerate, booktabs, bm, siunitx, physics, enumitem, placeins, environ, xifthen, hyperref, amsmath, textcomp, amssymb, amsfonts, amsthm, geometry, graphicx}
+\pgfplotsset{compat=1.18}
+\DeclareSIUnit{\mph}{mph}
+\DeclareDocumentCommand\vectorbold{ m }{\bm{{#1}}}
+\DeclareDocumentCommand\vectorarrow{ m }{\vec{\bm{{#1}}}}
+\DeclareDocumentCommand\vectorunit{ m }{\mathop{}\!\IfStrEqCase{#1}{{i}{{\bm{\hat{\textnormal{\bfseries\i}}}}}{j}{{\bm{\hat{\textnormal{\bfseries\j}}}}}}[{\bm{\hat{#1}}}]\mathop{}\!}
+\DeclareDocumentCommand\dotproduct{}{\bm{{\cdot}}} % Vector dot product symbol
+\DeclareDocumentCommand\crossproduct{}{\bm{{\times}}} % Vector cross product symbol
+\DeclareMathOperator{\domain}{dom}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\nll}{null}
+\DeclareDocumentCommand\dom{}{\trigbraces{\domain}}
+\DeclareMathOperator*{\cint}{\cirfnint}
+\DeclareDocumentCommand\aqty{ l m }{\braces#1{\langle}{\rangle}{#2}}
+\DeclareDocumentCommand\ceil{ l m }{\braces#1{\lceil}{\rceil}{#2}}
+\DeclareDocumentCommand\floor{ l m }{\braces#1{\lfloor}{\rfloor}{#2}}
+\DeclareDocumentCommand\set{ m o }{\left\{#1\IfNoValueTF{#2}{}{\:\middle|\:#2}\right\}}
+\DeclareDocumentCommand\seq{ m o }{\left(#1\IfNoValueTF{#2}{}{\:\middle|\:#2}\right)}
+\DeclareDocumentCommand\sstext{ s m }{\IfBooleanTF{#1}{}{\ }\text{#2}\ }
+\DeclareDocumentCommand\ss{}{\sstext}
+\DeclareDocumentCommand\qst{ s }{\IfBooleanTF{#1}{}{\quad}\text{s.t.}\quad}
+\def\idiffd{{\mathchar'26\mkern-11mu \diffd}}
+\DeclareDocumentCommand\idd{ o g d() }{\IfNoValueTF{#2}{\IfNoValueTF{#3}{\idiffd\IfNoValueTF{#1}{}{^{#1}}}{\mathinner{\idiffd\IfNoValueTF{#1}{}{^{#1}}\argopen(#3\argclose)}}}{\mathinner{\idiffd\IfNoValueTF{#1}{}{^{#1}}#2} \IfNoValueTF{#3}{}{(#3)}}}
+\DeclareMathOperator{\Span}{span}
+\newcommand{\suppose}{\makebox[0.5em]{\(_{\rule{.15ex}{.8ex}}\)}\llap{S}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newtheorem*{remark*}{Remark}
+\newtheorem*{note*}{Note}
+\newtheorem*{example*}{Example}
+\newtheorem*{exercise*}{Exercise}
+\newtheorem*{question*}{Question}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{claim*}{Claim}
+\newtheorem*{definition*}{Definition}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{corollary*}{Corollary}
+\newtheorem*{recall*}{Recall}
+\newtheorem{theorem}[subsection]{Theorem}
+\newtheorem{definition}[subsection]{Definition}
+\newtheorem{lemma}[subsection]{Lemma}
+\newtheorem{corollary}[subsection]{Corollary}
+\newtheorem{remark}[subsection]{Remark}
+\newenvironment{solution}{\renewcommand{\qedsymbol}{}\proof[Solution]}{\endproof}
+\newlist{problems}{enumerate}{3}
+\setlist[problems, 1]{label = \textbf{\arabic{problemsi}.}}
+\setlist[problems, 2]{label = (\alph{problemsii})}
+\setlist[problems, 3]{label = \roman{problemsiii}.}
+\def\Course{CRES}
+\def\Name{Johan Vonk}
+\def\SID{3036855754}
+\def\Email{vonk@berkeley.edu}
+\def\Title{Derivation}
+\def\Session{Fall 2022}
+\title{
+    \Title\\
+    \large \Course\ --\ \Session}
+    \author{\Name, \href{mailto:\Email}\Email, \SID}
+    \date{\normalsize\today
+}
+\textheight=9in
+\textwidth=6.5in
+\topmargin=-.75in
+\oddsidemargin=0.25in
+\evensidemargin=0.25in
+\allowdisplaybreaks{}
+\begin{document}
+    \maketitle
+    \begin{align*}
+        \dv{\vb{p}}{t} &= e \pqty{\vb{E} + \frac{\vb{v}}{c} \times \vb{B}} - \frac{2 e^2}{3 c} \vb{g_0}\\
+        \vb{g_0} &= \pqty{\frac{e}{mc^2}}^2 \gamma^2 \vb{v} \bqty{\pqty{\vb{E} + \frac{\vb{v}}{c} \times \vb{B}}^2 - \pqty{\frac{\vb{v}}{c} \vdot E}}\\
+        E &= \vb{0}\\
+        \gamma &= \sqrt{1 + \pqty{\frac{\vb{p}}{m c}}^2}\\
+        \vb{v} &= \frac{\vb{p}}{m \cdot \gamma}\\
+        &= \frac{\vb{p}}{\sqrt{m^2 + \pqty{\frac{\vb{p}}{c}}^2}}\\
+        \implies \vb{g_0} &= \pqty{\frac{e}{mc^2}}^2 \pqty{1 + \pqty{\frac{\vb{p}}{m c}}^2} \frac{\vb{p}}{\sqrt{m^2 + \pqty{\frac{\vb{p}}{c}}^2}} \frac{1}{c} \pqty{\frac{\vb{p}}{\sqrt{m^2 + \pqty{\frac{\vb{p}}{c}}^2}} \times \vb{B}}^2\\
+        &= \frac{e^2}{m^2 c^4} \frac{m^2 + \pqty{\frac{\vb{p}}{c}}^2}{m^2} \frac{\vb{p}}{\pqty{m^2 + \pqty{\frac{\vb{p}}{c}}^2}^{\frac{3}{2}}} \frac{1}{c} \pqty{\vb{p} \times \vb{B}}^2\\
+        &= \frac{e^2}{m^2 c^5} \frac{\vb{p}}{\sqrt{m^2 + \pqty{\frac{\vb{p}}{c}}^2}} \pqty{\vb{p} \times \vb{B}}^2\\
+        &= \frac{e^2}{m^2 c^4} \frac{\vb{p}}{\sqrt{m^2 c^2 + \vb{p}^2}} \pqty{\vb{p} \times \vb{B}}^2\\
+        \implies \dv{\vb{p}}{t} &= e \pqty{\frac{\vb{p}}{\sqrt{m^2 c^2 + \vb{p}^2}} \times \vb{B}} - \frac{2 e^2}{3 c} \vb{g_0}\\
+        &= \frac{e}{\sqrt{m^2 c^2 + \vb{p}^2}} \pqty{\vb{p} \times \vb{B}} - \frac{2 e^2}{3 c} \vb{g_0}\\
+        &= \frac{e}{\sqrt{m^2 c^2 + \vb{p}^2}} \pqty{\vb{p} \times \vb{B}} - \frac{2 e^2}{3 c} \bqty{\frac{e^2}{m^2 c^4} \frac{\vb{p}}{\sqrt{m^2 c^2 + \vb{p}^2}} \pqty{\vb{p} \times \vb{B}}^2}\\
+        &= \frac{e}{\sqrt{m^2 c^2 + \vb{p}^2}}  \bqty{\pqty{\vb{p} \times \vb{B}} - \frac{2 e}{3 c} \pqty{\frac{e^2}{m^2 c^4} \vb{p}} \pqty{\vb{p} \times \vb{B}}^2}\\
+        \vb{B} &= \pmqty{B & 0 & 0}\\
+        \vb{p} &= \pmqty{p_x & p_y & p_z}\\
+        \vb{p}^2 &= \sqrt{p_x^2 + p_y^2 + p_z^2}\\
+        \vb{p} \times \vb{B} &= \pqty{\vb{p}_{\perp} + \vb{p}_{\parallel}} \times \vb{B}\\
+        &= \vb{p}_{\perp} \times \vb{B}\\
+        &= \pmqty{0 & p_z B & - p_y B}\\
+        \pqty{\vb{p} \times \vb{B}}^2 &= \pqty{\norm{\vb{p}_{\perp}} \norm{B}}^2\\
+        &= \pqty{p_y^2 + p_z^2} B^2\\
+        \implies \dv{\vb{p}}{t} &= \frac{e}{\sqrt{m^2 c^2 + p_x^2 + p_y^2 + p_z^2}} \bqty{\pmqty{0 & p_z B & - p_y B} - \frac{2 e}{3 c} \pqty{\frac{e^2}{m^2 c^4} \pmqty{p_x & p_y & p_z}} \pqty{p_y^2 + p_z^2} B^2}\\
+        &= \frac{e}{\sqrt{m^2 c^2 + p_x^2 + p_y^2 + p_z^2}} \bqty{\pmqty{0 & p_z B & - p_y B} - \pmqty{p_x & p_y & p_z} \frac{2 e^3 \pqty{p_y^2 + p_z^2} B^2}{3 m^2 c^5}}\\
+        \dv{\vb{p}}{t} &= \pmqty{\dv{p_x}{t}, \dv{p_y}{t}, \dv{p_z}{t}}\\
+        \dv{p_x}{t} &= - \frac{e B}{\sqrt{m^2 c^2 + p_x^2 + p_y^2 + p_z^2}} \frac{2 e^3 B p_x \pqty{p_y^2 + p_z^2}}{3 m^2 c^5}\\
+        \dv{p_y}{t} &= - \frac{e B}{\sqrt{m^2 c^2 + p_x^2 + p_y^2 + p_z^2}} \frac{- p_z + 2 e^3 B p_y \pqty{p_y^2 + p_z^2}}{3 m^2 c^5}\\
+        \dv{p_z}{t} &= - \frac{e B}{\sqrt{m^2 c^2 + p_x^2 + p_y^2 + p_z^2}} \frac{p_y + 2 e^3 B p_z \pqty{p_y^2 + p_z^2}}{3 m^2 c^5}\\
+    \end{align*}
+\end{document}
