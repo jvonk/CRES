@@ -113,4 +113,68 @@
         f(t) &= \tan(c_{2}-\frac{eBt}{\sqrt{m^2 c^{2}+c_{1}^{2}+2c_{2}}})
         \intertext{Which is just the equation of a circle.}
     \end{align*}
+    \pagebreak
+    \begin{align*}
+        \intertext{In natural units,}
+        c &= 1\\
+        \mu_0 &= 1\\
+        \epsilon_0 &= 1\\
+        \div{\vb{E}} &= \rho\\
+        \curl{\vb{B}} - \pdv{\vb{E}}{t} &= \vb{J}\\
+        F^{\alpha \beta} &= \pmqty{
+            0 & - E_x & - E_y & - E_z\\
+            E_x & 0 & - B_z & B_y\\
+            E_y & B_z & 0 & -B_x\\
+            E_z & -B_y & B_x & 0
+        }\\
+        \partial_{\alpha} &= \pmqty{\pdv{t} & \pdv{x} & \pdv{y} & \pdv{z}}\\
+        \partial_{\alpha} F^{\alpha \beta} &= \pmqty{\div{\vb{E}}, \curl{\vb{B}} - \pdv{\vb{E}}{t}}\\
+        \implies \partial_{\alpha} F^{\alpha \beta} &= J^{\beta}\\
+        \div{\vb{B}} &= 0\\
+        \curl{\vb{E}} + \pdv{\vb{B}}{t} &= 0\\
+        G^{\alpha \beta} &= \frac{1}{2} \epsilon^{\alpha \beta \gamma \delta} F_{\gamma \delta}\\
+        &= \pmqty{
+            0 & - B_x & - B_y & - B_z\\
+            B_x & 0 & E_z & -E_y\\
+            B_y & -E_z & 0 & E_x\\
+            B_z & E_y & -E_x & 0
+        }\\
+        \partial_{\alpha} G^{\alpha \beta} &= \pmqty{\div{\vb{B}}, \curl{\vb{E}} + \pdv{\vb{B}}{t}}\\
+        \implies \partial_{\alpha} G^{\alpha \beta} &= 0\\
+        \frac{1}{2} \partial_{\alpha} \epsilon^{\alpha \beta \gamma \delta} F_{\gamma \delta} &= 0\\
+        \intertext{Similarly, for the Lorentz Force,}
+        \vb{F} &= m \vb{a}\\
+        &= q \vb{E} + q \vb{v} \times \vb{B}\\
+        &= q \pqty{F^{\alpha \beta} U_{\beta}}\\
+        &= m a^{\alpha}\\
+        a^{\alpha} &= \frac{e}{m} F^{\alpha \beta} U_{\beta}
+        \intertext{The Abraham-Lorentz-Dirac force is defined by,}
+        a^{\alpha} &= \frac{e}{m} \pqty{{F_{\text{ext}}}^{\alpha}_{\beta} + {F_{\text{rad}}}^{\alpha}_{\beta}} U^{\beta}\\
+        {F_{\text{ext}}}^{\alpha}_{\beta} &= \pmqty{
+            0 & - E_x & - E_y & - E_z\\
+            E_x & 0 & B_z & -B_y\\
+            E_y & -B_z & 0 & B_x\\
+            E_z & B_y & -B_x & 0
+        }\\
+        {F_{\text{rad}}}^{\alpha}_{\beta} &= \frac{2}{3} e \pqty{\dv{a}{\tau}^{\alpha} U_{\beta} - U^{\alpha} \dv{a}{\tau}_{\beta}}
+        \intertext{To get the Landau-Lifshitz form, we approximate four-acceleration without radiation reaction,}
+        a^{\alpha} &\approx \frac{e}{m} {F_{\text{ext}}}^{\alpha}_{\beta} U^{\beta}\\
+        \dv{a}{\tau}^{\alpha} &\approx \frac{e}{m} \dv{\tau}({F_{\text{ext}}}^{\alpha}_{\beta} U^{\beta})\\
+        &= \frac{e}{m} \pqty{\dv{\tau}({F_{\text{ext}}}^{\alpha}_{\beta}) U^{\beta} + {F_{\text{ext}}}^{\alpha}_{\beta} \dv{U^{\beta}}{\tau}}\\
+        \dv{\tau}({F_{\text{ext}}}^{\alpha}_{\beta}) &= \dv{X^{\lambda}}{\tau} \pdv{{F_{\text{ext}}}^{\alpha}_{\beta}}{X^{\lambda}}\\
+        &= U^{\lambda} \pqty{\partial_{\lambda} {F_{\text{ext}}}^{\alpha}_{\beta}}\\
+        \dv{U^{\beta}}{\tau} &= a^{\beta}\\
+        &\approx \frac{e}{m} {F_{\text{ext}}}^{\beta}_{\lambda} U^{\lambda}\\
+        \dv{a}{\tau}^{\alpha} &\approx \frac{e}{m} \pqty{U^{\lambda} \pqty{\partial_{\lambda} {F_{\text{ext}}}^{\alpha}_{\beta}} U^{\beta} + \frac{e}{m} {F_{\text{ext}}}^{\alpha}_{\beta} {F_{\text{ext}}}^{\beta}_{\lambda} U^{\lambda}}
+        \intertext{The Landau-Lifshitz equation sets this equal to a new value, resulting in}
+        {F_{\text{ext}}}^{\alpha}_{\beta} &= \pmqty{
+            0 & - E_x & - E_y & - E_z\\
+            E_x & 0 & B_z & -B_y\\
+            E_y & -B_z & 0 & B_x\\
+            E_z & B_y & -B_x & 0
+        }\\
+        \dv{w}{\tau}^{\alpha} &= \frac{e}{m} \pqty{U^{\lambda} \pqty{\partial_{\lambda} {F_{\text{ext}}}^{\alpha}_{\beta}} U^{\beta} + \frac{e}{m} {F_{\text{ext}}}^{\alpha}_{\beta} {F_{\text{ext}}}^{\beta}_{\lambda} U^{\lambda}}\\
+        {F_{\text{rad}}}^{\alpha}_{\beta} &= \frac{2}{3} e \pqty{\dv{w}{\tau}^{\alpha} U_{\beta} - U^{\alpha} \dv{w}{\tau}_{\beta}}\\
+        a^{\alpha} &= \frac{e}{m} \pqty{{F_{\text{ext}}}^{\alpha}_{\beta} + {F_{\text{rad}}}^{\alpha}_{\beta}} U^{\beta}\\
+    \end{align*}
 \end{document}

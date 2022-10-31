@@ -130,3 +130,6 @@ dmypy.json
 
 # PDFs
 Resources/
+
+# data
+Data/
